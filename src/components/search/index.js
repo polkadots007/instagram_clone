@@ -20,7 +20,7 @@ export default function SearchBar() {
     const handleSearch = async () => {
       // event.preventDefault();
       const profiles = await searchUserByUsername(searchText);
-      // setMatchedUsers(profiles);
+      setMatchedUsers(profiles);
     };
     if (searchText.length > 0) handleSearch();
   }, [searchText]);
