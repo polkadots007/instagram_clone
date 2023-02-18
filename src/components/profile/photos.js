@@ -1,8 +1,56 @@
 /* eslint-disable no-nested-ternary */
 import PropTypes from 'prop-types';
 import Skeleton from 'react-loading-skeleton';
+import { useContext, useState } from 'react';
+import UserContext from '../../context/user';
+import FirebaseContext from '../../context/firebase';
 import 'react-loading-skeleton/dist/skeleton.css';
 
+function PhotoHeart({ docId, likedPhoto, totalLikes }) {
+  const {
+    user: { uid: userId = '' }
+  } = useContext(UserContext);
+  const [toggleLiked, setToggleLiked] = useState(likedPhoto);
+  const [likes, setLikes] = useState(totalLikes);
+  const { firebase, FieldValue } = useContext(FirebaseContext);
+
+  const handleToggleLiked = async () => {
+    setToggleLiked((toggleLiked) => !toggleLiked);
+    setLikes((likes) => (toggleLiked ? likes - 1 : likes + 1));
+    await firebase
+      .firestore()
+      .collection('photos')
+      .doc(docId)
+      .update({
+        likes: toggleLiked ? FieldValue.arrayRemove(userId) : FieldValue.arrayUnion(userId)
+      });
+  };
+  return (
+    <p className="flex items-center text-white font-bold">
+      <svg
+        onClick={() => handleToggleLiked()}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter') {
+            handleToggleLiked();
+          }
+        }}
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        className={`w-8 mr-4 select-none cursor-pointer focus:outline-none ${
+          toggleLiked ? 'fill-red text-red-primary' : 'text-white'
+        }`}
+      >
+        <path
+          fillRule="evenodd"
+          d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+          clipRule="evenodd"
+        />
+      </svg>
+      {likes}
+    </p>
+  );
+}
 export default function Photos({ photos }) {
   return (
     <div className="h-16 border-t border-gray-primary mt-12 pt-4">
@@ -14,21 +62,11 @@ export default function Photos({ photos }) {
             <div key={photo.docId} className="relative group">
               <img src={photo.imageSrc} alt={photo.caption} />
               <div className="absolute bottom-0 left-0 bg-gray-200 z-10 w-full justify-evenly items-center h-full bg-black-faded group-hover:flex hidden">
-                <p className="flex items-center text-white font-bold">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className="w-8 mr-4"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  {photo.likes.length}
-                </p>
+                <PhotoHeart
+                  docId={photo.docId}
+                  likedPhoto={photo.userLikedPhoto}
+                  totalLikes={photo.likes.length}
+                />
                 <p className="flex items-center text-white font-bold">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -56,4 +94,10 @@ export default function Photos({ photos }) {
 
 Photos.propTypes = {
   photos: PropTypes.array.isRequired
+};
+
+PhotoHeart.propTypes = {
+  docId: PropTypes.string.isRequired,
+  totalLikes: PropTypes.number.isRequired,
+  likedPhoto: PropTypes.bool.isRequired
 };

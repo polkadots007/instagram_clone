@@ -1,10 +1,14 @@
 import PropTypes from 'prop-types';
-import { useReducer, useEffect } from 'react';
+import { useReducer, useEffect, useContext } from 'react';
+import UserContext from '../../context/user';
 import { getUserPhotosByUserId } from '../../services/firebase';
 import Header from './header';
 import Photos from './photos';
 
 export default function UserProfile({ user }) {
+  const {
+    user: { uid: loggedInUserId = '' }
+  } = useContext(UserContext);
   const reducer = (state, newState) => ({ ...state, ...newState });
   const initialState = {
     profile: {},
@@ -19,7 +23,7 @@ export default function UserProfile({ user }) {
   useEffect(() => {
     async function getProfileInfoAndPhotos() {
       const { userId, followers, following } = user;
-      const photos = await getUserPhotosByUserId(userId);
+      const photos = await getUserPhotosByUserId(userId, loggedInUserId);
 
       dispatch({
         profile: user,

@@ -117,17 +117,29 @@ export async function getPhotosByIds(userId, followingIds) {
   return photosWithUserDetails;
 }
 
-export async function getUserPhotosByUserId(userId) {
+export async function getUserPhotosByUserId(userId, loggedInUserId) {
   const result = await firebase
     .firestore()
     .collection('photos')
     .where('userId', '==', userId)
     .get();
 
-  const photos = result.docs.map((photo) => ({
-    ...photo.data(),
-    docId: photo.id
-  }));
+  // const photos = result.docs.map((photo) => ({
+  //   ...photo.data(),
+  //   docId: photo.id
+  // }));
+
+  const photos = result.docs.map((photo) => {
+    let userLikedPhoto = false;
+    if (photo?.data().likes?.includes(loggedInUserId)) {
+      userLikedPhoto = true;
+    }
+    return {
+      ...photo.data(),
+      userLikedPhoto,
+      docId: photo.id
+    };
+  });
 
   return photos;
 }
