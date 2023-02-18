@@ -23,6 +23,22 @@ export async function getUserByUsername(username) {
   }));
 }
 
+export async function searchUserByUsername(searchTerm) {
+  const result = await firebase
+    .firestore()
+    .collection('users')
+    // .where('username', '==', searchTerm.toLowerCase())
+    .get();
+
+  const profiles = result.docs
+    .map((item) => ({
+      ...item.data(),
+      docId: item.id
+    }))
+    .filter((item) => item.username.includes(searchTerm.toLowerCase()));
+  return profiles.length > 0 ? profiles : [{ docId: 0, username: 'No results found' }];
+}
+
 export async function getUserByUserId(userId) {
   const result = await firebase.firestore().collection('users').where('userId', '==', userId).get();
   const user = result.docs.map((item) => ({
