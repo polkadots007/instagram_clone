@@ -20,8 +20,7 @@ export default function SearchBar() {
     const handleSearch = async () => {
       // event.preventDefault();
       const profiles = await searchUserByUsername(searchText);
-      console.log('search', profiles);
-      setMatchedUsers(profiles);
+      // setMatchedUsers(profiles);
     };
     if (searchText.length > 0) handleSearch();
   }, [searchText]);
@@ -88,7 +87,7 @@ export default function SearchBar() {
             <SearchedProfile key={profile.docId} index={index} username={profile.username} />
           ))
         ) : (
-          <p className="w-[30rem] h-14 p-4 bg-white text-gray-base z-10 absolute border-x border-b border-gray-primary">
+          <p className="w-full h-14 p-4 bg-white text-gray-base z-10 relative border-x border-b border-gray-primary">
             Searching...
           </p>
         ))}

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export default function SearchedProfile({ index, username }) {
   return (
     <div
-      className={`flex items-center justify-start w-[30rem] h-14 p-4 mt-${
+      className={`flex items-center justify-start w-full h-14 p-4 mt-${
         index * 14
       } bg-white z-10 relative border-x last:border-b border-gray-primary`}
     >

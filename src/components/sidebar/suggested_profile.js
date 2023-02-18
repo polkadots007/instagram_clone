@@ -43,7 +43,7 @@ export default function SuggestedProfile({
           <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </div>
-      <div className="flex flex-row items-center align-items justify-between">
+      <div className="flex flex-col md:flex-row items-start md:items-center align-items justify-between">
         <div className="flex items-center justify-between">
           <img
             className="rounded-full w-8 h-8 flex mr-3"
@@ -51,11 +51,11 @@ export default function SuggestedProfile({
             alt=""
           />
           <Link to={`/p/${profileUsername}`}>
-            <p className="font-bold text-sm">{profileUsername}</p>
+            <p className="font-bold text-sm mb-4 md:mb-0">{profileUsername}</p>
           </Link>
         </div>
         <button
-          className="text-xs font-bold text-blue-medium"
+          className="text-xs font-bold text-blue-medium ml-12 md:ml-0 -mt-4 md:mt-0"
           type="button"
           onClick={handleFollowUser}
         >
