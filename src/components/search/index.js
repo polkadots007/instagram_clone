@@ -7,7 +7,7 @@ export default function SearchBar() {
   const [matchedUsers, setMatchedUsers] = useState([]);
 
   const handleSearchInput = ({ target }) => {
-    setMatchedUsers([]);
+    // setMatchedUsers([]);
     setSearchText(target.value);
   };
 
@@ -84,8 +84,8 @@ export default function SearchBar() {
       </form>
       {searchText.length > 0 &&
         (matchedUsers.length > 0 ? (
-          matchedUsers.map((profile) => (
-            <SearchedProfile key={profile.docId} username={profile.username} />
+          matchedUsers.map((profile, index) => (
+            <SearchedProfile key={profile.docId} index={index} username={profile.username} />
           ))
         ) : (
           <p className="w-[30rem] h-14 p-4 bg-white text-gray-base z-10 absolute border-x border-b border-gray-primary">
