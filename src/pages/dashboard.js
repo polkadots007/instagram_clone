@@ -6,7 +6,7 @@ import Sidebar from '../components/sidebar';
 export default function Dashboard() {
   useEffect(() => {
     // eslint-disable-next-line no-undef
-    document.title = 'Instagram';
+    document.title = 'Snapper';
   }, []);
   return (
     <div className="bg-gray-background">

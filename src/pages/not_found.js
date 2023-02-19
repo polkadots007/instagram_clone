@@ -4,7 +4,7 @@ import Header from '../components/header';
 export default function NotFound() {
   useEffect(() => {
     // eslint-disable-next-line no-undef
-    document.title = 'Not Found - Instagram';
+    document.title = 'Not Found - Snapper';
   }, []);
   return (
     <div className="bg-gray-background">

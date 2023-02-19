@@ -53,7 +53,7 @@ export default function SignUp() {
 
   useEffect(() => {
     // eslint-disable-next-line no-undef
-    document.title = 'Sign Up - Instagram';
+    document.title = 'Sign Up - Snapper';
   }, []);
 
   return (
