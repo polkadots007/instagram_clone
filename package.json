@@ -2,7 +2,6 @@
   "name": "insta_clone",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://polkadots007.github.io/instagram_clone",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
