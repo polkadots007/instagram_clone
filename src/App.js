@@ -18,7 +18,7 @@ function App() {
   const UserContextProp = useMemo(() => ({ user }), [user]);
   return (
     <UserContext.Provider value={UserContextProp}>
-      <Router>
+      <Router basename="/instagram_clone">
         <Suspense
           fallback={
             <p
