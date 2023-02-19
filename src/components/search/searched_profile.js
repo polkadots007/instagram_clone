@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-export default function SearchedProfile({ index, username }) {
+export default function SearchedProfile({ visRef, index, username }) {
   return (
     <div
+      ref={visRef}
       className={`flex items-center justify-start w-full h-14 p-4 mt-${
         index * 14
       } bg-white z-10 relative border-x last:border-b border-gray-primary`}
@@ -27,6 +28,7 @@ export default function SearchedProfile({ index, username }) {
 }
 
 SearchedProfile.propTypes = {
+  visRef: PropTypes.object,
   index: PropTypes.number,
   username: PropTypes.string.isRequired
 };

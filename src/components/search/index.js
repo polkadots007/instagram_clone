@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { searchUserByUsername } from '../../services/firebase';
 import SearchedProfile from './searched_profile';
+import useComponentVisible from '../../hooks/use_comp_visible';
 
 export default function SearchBar() {
   const [searchText, setSearchText] = useState('');
   const [matchedUsers, setMatchedUsers] = useState([]);
+  const { ref, isComponentVisible } = useComponentVisible(true);
 
   const handleSearchInput = ({ target }) => {
     // setMatchedUsers([]);
@@ -24,6 +26,10 @@ export default function SearchBar() {
     };
     if (searchText.length > 0) handleSearch();
   }, [searchText]);
+
+  useEffect(() => {
+    if (!isComponentVisible) setSearchText('');
+  }, [isComponentVisible]);
 
   return (
     <div className="text-gray-700 my-2 w-[30rem] border border-gray-primary rounded-xl">
@@ -82,9 +88,15 @@ export default function SearchBar() {
         )}
       </form>
       {searchText.length > 0 &&
+        isComponentVisible &&
         (matchedUsers.length > 0 ? (
           matchedUsers.map((profile, index) => (
-            <SearchedProfile key={profile.docId} index={index} username={profile.username} />
+            <SearchedProfile
+              key={profile.docId}
+              visRef={ref}
+              index={index}
+              username={profile.username}
+            />
           ))
         ) : (
           <p className="w-full h-14 p-4 bg-white text-gray-base z-10 relative border-x border-b border-gray-primary">

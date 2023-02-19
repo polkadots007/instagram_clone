@@ -528,6 +528,10 @@ video {
   margin-left: auto;
   margin-right: auto;
 }
+.mx-12 {
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
 .mx-3 {
   margin-left: 0.75rem;
   margin-right: 0.75rem;
@@ -539,10 +543,6 @@ video {
 .my-1 {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
-}
-.mx-12 {
-  margin-left: 3rem;
-  margin-right: 3rem;
 }
 .mb-8 {
   margin-bottom: 2rem;
@@ -714,9 +714,6 @@ video {
 }
 .cursor-pointer {
   cursor: pointer;
-}
-.cursor-none {
-  cursor: none;
 }
 .cursor-auto {
   cursor: auto;
