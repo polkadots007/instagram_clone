@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/instagram_clone/static/css/main.4fc6c852.css",
+    "main.js": "/instagram_clone/static/js/main.77bdc198.js",
+    "static/js/400.c59af6fd.chunk.js": "/instagram_clone/static/js/400.c59af6fd.chunk.js",
+    "static/js/231.1a423fe8.chunk.js": "/instagram_clone/static/js/231.1a423fe8.chunk.js",
+    "static/js/465.ff9a6026.chunk.js": "/instagram_clone/static/js/465.ff9a6026.chunk.js",
+    "static/css/128.66b3834b.chunk.css": "/instagram_clone/static/css/128.66b3834b.chunk.css",
+    "static/js/128.96608e10.chunk.js": "/instagram_clone/static/js/128.96608e10.chunk.js",
+    "static/css/577.66b3834b.chunk.css": "/instagram_clone/static/css/577.66b3834b.chunk.css",
+    "static/js/577.8869f9b3.chunk.js": "/instagram_clone/static/js/577.8869f9b3.chunk.js",
+    "static/css/417.66b3834b.chunk.css": "/instagram_clone/static/css/417.66b3834b.chunk.css",
+    "static/js/417.5be18e4b.chunk.js": "/instagram_clone/static/js/417.5be18e4b.chunk.js",
+    "static/js/659.75a0a18c.chunk.js": "/instagram_clone/static/js/659.75a0a18c.chunk.js",
+    "static/js/353.4bcf67c4.chunk.js": "/instagram_clone/static/js/353.4bcf67c4.chunk.js",
+    "index.html": "/instagram_clone/index.html",
+    "main.4fc6c852.css.map": "/instagram_clone/static/css/main.4fc6c852.css.map",
+    "main.77bdc198.js.map": "/instagram_clone/static/js/main.77bdc198.js.map",
+    "400.c59af6fd.chunk.js.map": "/instagram_clone/static/js/400.c59af6fd.chunk.js.map",
+    "231.1a423fe8.chunk.js.map": "/instagram_clone/static/js/231.1a423fe8.chunk.js.map",
+    "465.ff9a6026.chunk.js.map": "/instagram_clone/static/js/465.ff9a6026.chunk.js.map",
+    "128.66b3834b.chunk.css.map": "/instagram_clone/static/css/128.66b3834b.chunk.css.map",
+    "128.96608e10.chunk.js.map": "/instagram_clone/static/js/128.96608e10.chunk.js.map",
+    "577.66b3834b.chunk.css.map": "/instagram_clone/static/css/577.66b3834b.chunk.css.map",
+    "577.8869f9b3.chunk.js.map": "/instagram_clone/static/js/577.8869f9b3.chunk.js.map",
+    "417.66b3834b.chunk.css.map": "/instagram_clone/static/css/417.66b3834b.chunk.css.map",
+    "417.5be18e4b.chunk.js.map": "/instagram_clone/static/js/417.5be18e4b.chunk.js.map",
+    "659.75a0a18c.chunk.js.map": "/instagram_clone/static/js/659.75a0a18c.chunk.js.map",
+    "353.4bcf67c4.chunk.js.map": "/instagram_clone/static/js/353.4bcf67c4.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4fc6c852.css",
+    "static/js/main.77bdc198.js"
+  ]
+}
