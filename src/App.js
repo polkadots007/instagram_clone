@@ -11,6 +11,7 @@ const SignUp = lazy(() => import('./pages/sign_up'));
 const NotFound = lazy(() => import('./pages/not_found'));
 const Dashboard = lazy(() => import('./pages/dashboard'));
 const Profile = lazy(() => import('./pages/profile'));
+const PhotoDetails = lazy(() => import('./pages/photo_info'));
 
 function App() {
   const { user } = useAuthListener();
@@ -48,6 +49,7 @@ function App() {
               }
             />
             <Route path={ROUTES.PROFILE} element={<Profile />} />
+            <Route path={ROUTES.Photo} element={<PhotoDetails />} />
             <Route
               path={ROUTES.DASHBOARD}
               element={

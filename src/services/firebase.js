@@ -117,6 +117,32 @@ export async function getPhotosByIds(userId, followingIds) {
   return photosWithUserDetails;
 }
 
+export async function getPhotoByPhotoId(photoId, loggedInUserId) {
+  const result = await firebase
+    .firestore()
+    .collection('photos')
+    .where('photoId', '==', photoId)
+    .get();
+
+  const profilePhoto = result.docs.map((photo) => ({
+    ...photo.data(),
+    docId: photo.id
+  }));
+
+  const photo = await Promise.all(
+    profilePhoto.map(async (photo) => {
+      let userLikedPhoto = false;
+      if (loggedInUserId && photo.likes.includes(loggedInUserId)) {
+        userLikedPhoto = true;
+      }
+      const user = await getUserByUserId(photo.userId);
+      const { username } = user[0];
+      return { username, ...photo, userLikedPhoto };
+    })
+  );
+  return photo;
+}
+
 export async function getUserPhotosByUserId(userId, loggedInUserId) {
   const result = await firebase
     .firestore()

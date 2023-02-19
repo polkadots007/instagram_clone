@@ -6,7 +6,7 @@ import Actions from './actions';
 import Footer from './footer';
 import Comments from './comments';
 
-export default function Post({ content }) {
+export default function Post({ content, expandAllComments }) {
   const commentInput = useRef(null);
 
   const handleFocus = () => commentInput.current.focus();
@@ -24,9 +24,10 @@ export default function Post({ content }) {
       <Footer caption={content.caption} username={content.username} />
       <Comments
         docId={content.docId}
-        comments={content.comments}
+        comments={content.comments.reverse()}
         posted={content.dateCreated}
         commentInput={commentInput}
+        expandAll={expandAllComments}
       />
     </div>
   );
@@ -42,5 +43,6 @@ Post.propTypes = {
     likes: PropTypes.array.isRequired,
     comments: PropTypes.array.isRequired,
     dateCreated: PropTypes.number.isRequired
-  })
+  }),
+  expandAllComments: PropTypes.bool
 };

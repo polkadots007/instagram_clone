@@ -6,9 +6,8 @@ import Header from './header';
 import Photos from './photos';
 
 export default function UserProfile({ user }) {
-  const {
-    user: { uid: loggedInUserId = '' }
-  } = useContext(UserContext);
+  const { user: userDetails } = useContext(UserContext);
+  const loggedInUserId = userDetails?.uid;
   const reducer = (state, newState) => ({ ...state, ...newState });
   const initialState = {
     profile: {},
@@ -44,7 +43,7 @@ export default function UserProfile({ user }) {
         followingCount={followingCount}
         setFollowerCount={dispatch}
       />
-      <Photos photos={photosCollection} />
+      <Photos photos={photosCollection} profile={profile} />
     </>
   );
 }
