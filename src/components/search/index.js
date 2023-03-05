@@ -32,7 +32,11 @@ export default function SearchBar() {
   }, [isComponentVisible]);
 
   return (
-    <div className="text-gray-700 my-2 w-[30rem] border border-gray-primary rounded-xl">
+    <div
+      className={`text-gray-700 my-2 w-[30rem] border border-gray-primary ${
+        searchText.length > 0 ? 'rounded-t-xl' : 'rounded-xl'
+      }`}
+    >
       <form
         className="flex items-center justify-between pr-2"
         method="POST"
@@ -56,7 +60,7 @@ export default function SearchBar() {
         <input
           aria-label="Search"
           autoComplete="off"
-          className="text-sm text-gray-base my-1 w-full h-8 ml-2 mr-3 px-4 rounded-md"
+          className="text-sm text-gray-base w-full h-8 ml-2 my-1 mr-3 px-4 rounded-md"
           type="text"
           name="search-user"
           placeholder="Search..."

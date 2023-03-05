@@ -17,7 +17,7 @@ function PhotoHeart({ docId, likedPhoto, totalLikes }) {
   const handleToggleLiked = async () => {
     if (userId) {
       setToggleLiked((toggleLiked) => !toggleLiked);
-
+      setLikes((likes) => (toggleLiked ? likes - 1 : likes + 1));
       await firebase
         .firestore()
         .collection('photos')
@@ -25,8 +25,6 @@ function PhotoHeart({ docId, likedPhoto, totalLikes }) {
         .update({
           likes: toggleLiked ? FieldValue.arrayRemove(userId) : FieldValue.arrayUnion(userId)
         });
-
-      setLikes((likes) => (toggleLiked ? likes - 1 : likes + 1));
     }
   };
   return (
@@ -57,41 +55,41 @@ function PhotoHeart({ docId, likedPhoto, totalLikes }) {
 }
 export default function Photos({ photos, profile }) {
   return (
-    <div className="h-16 border-t border-gray-primary mt-12 pt-4">
-      <div className="grid grid-cols-3 gap-8 mt-4 mb-12 pb-4">
-        {!photos ? (
-          <Skeleton count={12} width={320} height={400} />
-        ) : photos.length > 0 ? (
-          photos.map((photo) => (
-            <div key={photo.docId} className="relative group">
-              <img src={photo.imageSrc} alt={photo.caption} />
-              <div className="absolute bottom-0 left-0 bg-gray-200 z-10 w-full justify-evenly items-center h-full bg-black-faded group-hover:flex hidden">
-                <PhotoHeart
-                  docId={photo.docId}
-                  likedPhoto={photo.userLikedPhoto}
-                  totalLikes={photo.likes.length}
-                />
-                <p className="flex items-center text-white font-bold">
-                  <Link to={`/p/${profile.username}/${photo.photoId}`}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      className="w-8 mr-4"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </Link>
-                  {photo.comments.length}
-                </p>
+    <div className="h-16 border-t border-gray-primary mt-12">
+      <div className="grid grid-cols-3 gap-3 mt-4 mb-12 px-4 pt-4 pb-6">
+        {!photos
+          ? new Array(12).fill(0).map((_, i) => <Skeleton key={i} width={320} height={400} />)
+          : photos.length > 0
+          ? photos.map((photo) => (
+              <div key={photo.docId} className="relative group border border-gray-primary">
+                <img src={photo.imageSrc} alt={photo.caption} />
+                <div className="absolute bottom-0 left-0 bg-gray-200 z-10 w-full justify-evenly items-center h-full bg-black-faded group-hover:flex hidden">
+                  <PhotoHeart
+                    docId={photo.docId}
+                    likedPhoto={photo.userLikedPhoto}
+                    totalLikes={photo.likes.length}
+                  />
+                  <p className="flex items-center text-white font-bold">
+                    <Link to={`/p/${profile.username}/${photo.photoId}`}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className="w-8 mr-4"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </Link>
+                    {photo.comments.length}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))
-        ) : null}
+            ))
+          : null}
       </div>
       {!photos || (photos.length === 0 && <p className="text-center text-2xl">No Posts Yet</p>)}
     </div>

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import useUser from '../../hooks/use_user';
+import { DEFAULT_IMG_SRC } from '../../constants/paths';
 import { toggleFollow, isUserFollowingProfile } from '../../services/firebase';
 
 export default function Header({
@@ -20,9 +21,9 @@ export default function Header({
   setFollowerCount
 }) {
   const { user } = useUser();
-  const loggedInUsername = user.username;
-  const [isFollowingProfile, setIsFollowingProfile] = useState(false);
-  const activeBtnFollow = profileUserName && profileUserName !== loggedInUsername;
+  const loggedInUsername = user?.username;
+  const [isFollowingProfile, setIsFollowingProfile] = useState(null);
+  const activeBtnFollow = loggedInUsername && profileUserName !== loggedInUsername;
 
   const handleToggleFollow = async () => {
     setIsFollowingProfile((isFollowingProfile) => !isFollowingProfile);
@@ -37,8 +38,8 @@ export default function Header({
       const isFollowing = await isUserFollowingProfile(user.username, profileUserId);
       setIsFollowingProfile(isFollowing);
     };
-    if (user.username && profileUserId) isLoggedInUserFollowingProfile();
-  }, [user.username, profileUserId]);
+    if (user?.username && profileUserId) isLoggedInUserFollowingProfile();
+  }, [user?.username, profileUserId]);
 
   return !profileUserName ? (
     <Skeleton count={1} width="100%" height={200} />
@@ -49,22 +50,29 @@ export default function Header({
           className="rounded-full h-40 w-40  flex"
           alt={`${profileUserName} profile`}
           src={`/images/avatars/${profileUserName}.jpg`}
+          onError={(e) => {
+            e.target.src = DEFAULT_IMG_SRC;
+          }}
         />
       </div>
       <div className="flex items-center justify-center flex-col col-span-2">
         <div className="container flex items-center">
           <p className="text-2xl mr-4">{profileUserName}</p>
-          {activeBtnFollow && (
-            <button
-              className="bg-blue-medium font-bold text-sm rounded text-white w-20 h-8"
-              type="button"
-              onClick={handleToggleFollow}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter') handleToggleFollow();
-              }}
-            >
-              {isFollowingProfile ? 'Unfollow' : 'Follow'}
-            </button>
+          {activeBtnFollow && isFollowingProfile === null ? (
+            <Skeleton count={1} width={80} height={32} />
+          ) : (
+            activeBtnFollow && (
+              <button
+                className="bg-blue-medium font-bold text-sm rounded text-white w-20 h-8"
+                type="button"
+                onClick={handleToggleFollow}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') handleToggleFollow();
+                }}
+              >
+                {isFollowingProfile ? 'Unfollow' : 'Follow'}
+              </button>
+            )
           )}
         </div>
         <div className="container flex mt-4">

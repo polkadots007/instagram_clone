@@ -8,6 +8,7 @@ import IsUserLoggedIn from './helpers/is_user_loggedin';
 
 const Login = lazy(() => import('./pages/login'));
 const SignUp = lazy(() => import('./pages/sign_up'));
+const Reset = lazy(() => import('./pages/reset'));
 const NotFound = lazy(() => import('./pages/not_found'));
 const Dashboard = lazy(() => import('./pages/dashboard'));
 const Profile = lazy(() => import('./pages/profile'));
@@ -48,6 +49,7 @@ function App() {
                 </IsUserLoggedIn>
               }
             />
+            <Route path={ROUTES.RESET} element={<Reset />} />
             <Route path={ROUTES.PROFILE} element={<Profile />} />
             <Route path={ROUTES.Photo} element={<PhotoDetails />} />
             <Route

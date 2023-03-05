@@ -1,13 +1,15 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import FirebaseContext from '../context/firebase';
 import UserContext from '../context/user';
 import * as ROUTES from '../constants/routes';
 import SearchBar from './search';
+import { DEFAULT_IMG_SRC } from '../constants/paths';
 
 export default function Header() {
   const { firebase } = useContext(FirebaseContext);
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
 
   return (
     <header className="h-16 bg-white border-b border-gray-primary mb-8">
@@ -43,10 +45,14 @@ export default function Header() {
                 <button
                   type="button"
                   title="Sign Out"
-                  onClick={() => firebase.auth().signOut()}
+                  onClick={() => {
+                    firebase.auth().signOut();
+                    navigate(ROUTES.LOGIN);
+                  }}
                   onKeyDown={(event) => {
                     if (event.key === 'Enter') {
                       firebase.auth().signOut();
+                      navigate(ROUTES.LOGIN);
                     }
                   }}
                 >
@@ -73,6 +79,9 @@ export default function Header() {
                         user.displayName ? user.displayName : user.username
                       }.jpg`}
                       alt={`${user.displayName ? user.displayName : user.username} profile`}
+                      onError={(e) => {
+                        e.target.src = DEFAULT_IMG_SRC;
+                      }}
                     />
                   </Link>
                 </div>

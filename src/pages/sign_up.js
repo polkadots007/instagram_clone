@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import FirebaseContext from '../context/firebase';
 import * as ROUTES from '../constants/routes';
-import { doesUsernameExist } from '../services/firebase';
+import { doesEmailAddressExist, doesUsernameExist } from '../services/firebase';
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -19,7 +19,8 @@ export default function SignUp() {
     event.preventDefault();
 
     const usernameExists = await doesUsernameExist(username);
-    if (!usernameExists) {
+    const emailExists = await doesEmailAddressExist(email);
+    if (!usernameExists && !emailExists) {
       try {
         const createdUserResult = await firebase
           .auth()
@@ -36,6 +37,7 @@ export default function SignUp() {
           fullName,
           emailAddress: email.toLocaleLowerCase(),
           following: [],
+          followers: [],
           dateCreated: Date.now()
         });
         navigate(ROUTES.DASHBOARD);
@@ -47,7 +49,7 @@ export default function SignUp() {
         setError(error.message);
       }
     } else {
-      setError('This username already exists! Please try another.');
+      setError('This username/email already exists! Please try another.');
     }
   };
 

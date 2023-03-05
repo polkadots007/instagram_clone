@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { DEFAULT_IMG_SRC } from '../../constants/paths';
 
 export default function Header({ username }) {
   return (
@@ -10,6 +11,9 @@ export default function Header({ username }) {
             className="rounded-full h-8 w-8 flex mr-3"
             src={`/images/avatars/${username}.jpg`}
             alt={`${username} profile`}
+            onError={(e) => {
+              e.target.src = DEFAULT_IMG_SRC;
+            }}
           />
           <p className="font-bold">{username}</p>
         </Link>

@@ -36,8 +36,8 @@ export default function Login() {
           className="max-h-96"
         />
       </div>
-      <div className="flex flex-col w-2/5">
-        <div className="flex flex-col items-center bg-white p-4 border border-gray-primary mb-4 rounded">
+      <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center bg-white p-4 border border-gray-primary mb-2 rounded w-[320px]">
           <h1 className="flex justify-center w-full">
             <img src="/images/logo.png" alt="Instagram" className="mt-2 w-6/12 mb-4" />
           </h1>
@@ -69,9 +69,17 @@ export default function Login() {
               }
             `}
             >
-              Log In
+              Login
             </button>
           </form>
+        </div>
+        <div className="flex justify-center items-center flex-col w-full by-white p-4 mb-2 border border-gray-primary rounded">
+          <p className="text-sm">
+            Forgot Password?{` `}
+            <Link to={ROUTES.RESET} className="font-bold text-blue-medium">
+              Reset password
+            </Link>
+          </p>
         </div>
         <div className="flex justify-center items-center flex-col w-full by-white p-4 border border-gray-primary rounded">
           <p className="text-sm">

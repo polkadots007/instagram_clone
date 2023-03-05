@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { DEFAULT_IMG_SRC } from '../../constants/paths';
 import { updateProfileFollowers, updateUserFollowing } from '../../services/firebase';
 
 export default function SuggestedProfile({
@@ -44,16 +45,17 @@ export default function SuggestedProfile({
         </svg>
       </div>
       <div className="flex flex-col md:flex-row items-start md:items-center align-items justify-between">
-        <div className="flex items-center justify-between">
+        <Link to={`/p/${profileUsername}`} className="flex items-center justify-between">
           <img
             className="rounded-full w-8 h-8 flex mr-3"
             src={`/images/avatars/${profileUsername}.jpg`}
             alt=""
+            onError={(e) => {
+              e.target.src = DEFAULT_IMG_SRC;
+            }}
           />
-          <Link to={`/p/${profileUsername}`}>
-            <p className="font-bold text-sm mb-4 md:mb-0">{profileUsername}</p>
-          </Link>
-        </div>
+          <p className="font-bold text-sm mb-4 md:mb-0">{profileUsername}</p>
+        </Link>
         <button
           className="text-xs font-bold text-blue-medium ml-12 md:ml-0 -mt-4 md:mt-0"
           type="button"

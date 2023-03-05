@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import FirebaseContext from '../../context/firebase';
 import UserContext from '../../context/user';
+import { DEFAULT_IMG_SRC } from '../../constants/paths';
 
 export default function AddComment({ docId, comments, setComments, commentInput }) {
   const [comment, setComment] = useState('');
@@ -31,6 +32,9 @@ export default function AddComment({ docId, comments, setComments, commentInput 
         className="flex-none rounded-full h-8 w-8 mx-3"
         src={`/images/avatars/${displayName}.jpg`}
         alt={`${displayName} profile`}
+        onError={(e) => {
+          e.target.src = DEFAULT_IMG_SRC;
+        }}
       />
       <div className="grow border-l border-t border-gray-primary rounded-l-md">
         <form
