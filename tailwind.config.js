@@ -12,7 +12,8 @@ module.exports = {
       white: '#ffffff',
       blue: {
         light: '#ADD8E6',
-        medium: '#005c98'
+        medium: '#005c98',
+        active: '#0ea5e9'
       },
       black: {
         light: '#262626',

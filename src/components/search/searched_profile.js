@@ -13,7 +13,7 @@ export default function SearchedProfile({ visRef, index, username }) {
       {username !== 'No results found' ? (
         <Link
           to={`/p/${username}`}
-          className="flex w-full p-2 hover:bg-blue-light rounded cursor-pointer"
+          className="flex w-full p-2 hover:bg-blue-active rounded cursor-pointer"
         >
           <img
             className="rounded-full w-8 h-8 flex mr-3"

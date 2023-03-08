@@ -49,7 +49,7 @@ export default function Comments({
             </p>
           ))}
         <p className="text-gray-base uppercase text-xs mt-2">
-          Posted {formatDistance(posted, new Date())} ago
+          {formatDistance(posted, new Date(), { addSuffix: true })}
         </p>
       </div>
       {loggedInUserId && (
