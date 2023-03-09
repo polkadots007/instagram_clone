@@ -205,3 +205,14 @@ export async function toggleFollow(
   await updateUserFollowing(activeUserDocId, profileUserId, isFollowingProfile);
   await updateProfileFollowers(profileDocId, followingUserId, isFollowingProfile);
 }
+
+export async function getAllDetailsByList(userIds) {
+  const profiles = [];
+  await Promise.all(
+    userIds.map(async (userId) => {
+      const profile = await getUserByUserId(userId);
+      profiles.push(profile[0]);
+    })
+  );
+  return profiles.length === userIds.length ? profiles : null;
+}

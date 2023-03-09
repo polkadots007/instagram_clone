@@ -17,12 +17,14 @@ module.exports = {
       },
       black: {
         light: '#262626',
-        faded: '#00000059'
+        faded: '#00000059',
+        full: '#000000'
       },
       gray: {
         base: '#616161',
         background: '#fafafa',
-        primary: '#dbdbdb'
+        primary: '#dbdbdb',
+        normal: '#efefef'
       },
       red: {
         primary: '#ed4956'

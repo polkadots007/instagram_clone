@@ -23,6 +23,11 @@ export default function Profile() {
     checkUserExists();
   }, [username, navigate]);
 
+  useEffect(() => {
+    if (user !== null) document.title = `${user.fullName.split(' ')[0]} (@${username})`;
+    else document.title = 'Snapper';
+  }, [user]);
+
   return user?.username ? (
     <div className="bg-gray-background">
       <Header />

@@ -12,6 +12,7 @@ const Reset = lazy(() => import('./pages/reset'));
 const NotFound = lazy(() => import('./pages/not_found'));
 const Dashboard = lazy(() => import('./pages/dashboard'));
 const Profile = lazy(() => import('./pages/profile'));
+const ProfileInfo = lazy(() => import('./pages/profile_info'));
 const PhotoDetails = lazy(() => import('./pages/photo_info'));
 
 function App() {
@@ -51,6 +52,8 @@ function App() {
             />
             <Route path={ROUTES.RESET} element={<Reset />} />
             <Route path={ROUTES.PROFILE} element={<Profile />} />
+            <Route path={ROUTES.FOLLOWERS} element={<ProfileInfo />} />
+            <Route path={ROUTES.FOLLOWING} element={<ProfileInfo />} />
             <Route path={ROUTES.Photo} element={<PhotoDetails />} />
             <Route
               path={ROUTES.DASHBOARD}

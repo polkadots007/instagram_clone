@@ -12,9 +12,11 @@ export default function Post({ content, expandAllComments }) {
   const handleFocus = () => commentInput.current.focus();
 
   return (
-    <div className="rounded col-span-4 border bg-white border-gray-primary mb-12">
+    <div className="w-[470px] rounded col-span-4 border bg-white border-gray-primary mb-12">
       <Header username={content.username} />
-      <Image src={content.imageSrc} caption={content.caption} />
+      <div className="bg-black-full flex justify-center items-center">
+        <Image src={content.imageSrc} caption={content.caption} />
+      </div>
       <Actions
         docId={content.docId}
         totalLikes={content.likes.length}

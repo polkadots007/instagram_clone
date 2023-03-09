@@ -4,4 +4,6 @@ export const LOGIN = '/login';
 export const RESET = '/reset';
 export const PROFILE = '/p/:username';
 export const Photo = '/p/:username/:id';
+export const FOLLOWERS = '/p/:username/followers';
+export const FOLLOWING = '/p/:username/following';
 export const NOT_FOUND = '/not_found';

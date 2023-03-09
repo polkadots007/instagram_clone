@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import useUser from '../../hooks/use_user';
@@ -83,15 +84,19 @@ export default function Header({
               <p className="mr-10">
                 <span className="font-bold">{photosCount}</span> Photos
               </p>
-              <p className="mr-10">
-                <span className="font-bold">{followerCount}</span>
-                {` `}
-                {followerCount === 1 ? `Follower` : `Followers`}
+              <p className="mr-10 cursor-pointer">
+                <Link to={`/p/${profileUserName}/followers`}>
+                  <span className="font-bold">{followerCount}</span>
+                  {` `}
+                  {followerCount === 1 ? `Follower` : `Followers`}
+                </Link>
               </p>
-              <p className="mr-10">
-                <span className="font-bold">{followingCount}</span>
-                {` `}
-                Following
+              <p className="mr-10 cursor-pointer">
+                <Link to={`/p/${profileUserName}/following`}>
+                  <span className="font-bold">{followingCount}</span>
+                  {` `}
+                  Following
+                </Link>
               </p>
             </>
           )}
