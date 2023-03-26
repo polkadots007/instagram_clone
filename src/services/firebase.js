@@ -216,3 +216,15 @@ export async function getAllDetailsByList(userIds) {
   );
   return profiles.length === userIds.length ? profiles : null;
 }
+
+export async function updateUserInfo(loggedInUserDocId, changeParams) {
+  return firebase
+    .firestore()
+    .collection('users')
+    .doc(loggedInUserDocId)
+    .update(changeParams)
+    .then((_) => console.info('Success'))
+    .catch((error) => {
+      console.error('Error adding following', error);
+    });
+}

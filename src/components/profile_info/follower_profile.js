@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import { useContext, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { DEFAULT_IMG_SRC } from '../../constants/paths';
 import { updateProfileFollowers, updateUserFollowing } from '../../services/firebase';
 

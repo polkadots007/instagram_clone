@@ -8,6 +8,7 @@ export function seedDatabase(firebase) {
       username: 'priyansi',
       fullName: 'Priyansi Parida',
       emailAddress: 'priyansiparida07@gmail.com',
+      bio: '',
       following: ['2'],
       followers: ['2', '3', '4'],
       dateCreated: Date.now()
@@ -17,6 +18,7 @@ export function seedDatabase(firebase) {
       username: 'raphael',
       fullName: 'Raffaello Sanzio da Urbino',
       emailAddress: 'raphael@sanzio.com',
+      bio: '',
       following: [],
       followers: ['wzg1vPCnVxg81RDRG2zlprNk8832'],
       dateCreated: Date.now()
@@ -26,6 +28,7 @@ export function seedDatabase(firebase) {
       username: 'dali',
       fullName: 'Salvador Dalí',
       emailAddress: 'salvador@dali.com',
+      bio: '',
       following: [],
       followers: ['wzg1vPCnVxg81RDRG2zlprNk8832'],
       dateCreated: Date.now()
@@ -35,6 +38,7 @@ export function seedDatabase(firebase) {
       username: 'orwell',
       fullName: 'George Orwell',
       emailAddress: 'george@orwell.com',
+      bio: '',
       following: [],
       followers: ['wzg1vPCnVxg81RDRG2zlprNk8832'],
       dateCreated: Date.now()

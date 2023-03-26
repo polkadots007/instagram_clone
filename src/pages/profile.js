@@ -35,5 +35,14 @@ export default function Profile() {
         <UserProfile user={user} />
       </div>
     </div>
-  ) : null;
+  ) : (
+    <p
+      className="flex max-w-full h-screen 
+      items-center justify-center font-bold
+      text-2xl
+      "
+    >
+      Loading...
+    </p>
+  );
 }

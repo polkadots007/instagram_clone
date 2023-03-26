@@ -57,7 +57,7 @@ export default function SuggestedProfile({
           <p className="font-bold text-sm mb-4 md:mb-0">{profileUsername}</p>
         </Link>
         <button
-          className="text-xs font-bold text-blue-medium ml-12 md:ml-0 -mt-4 md:mt-0"
+          className="text-xs font-bold text-blue-active hover:text-blue-medium ml-12 md:ml-0 -mt-4 md:mt-0"
           type="button"
           onClick={handleFollowUser}
         >

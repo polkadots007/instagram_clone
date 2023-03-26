@@ -1,4 +1,4 @@
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useContext, useEffect } from 'react';
 import { getUserByUsername } from '../services/firebase';
 import * as ROUTES from '../constants/routes';

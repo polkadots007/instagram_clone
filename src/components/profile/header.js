@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 import useUser from '../../hooks/use_user';
+import About from './about';
 import { DEFAULT_IMG_SRC } from '../../constants/paths';
 import { toggleFollow, isUserFollowingProfile } from '../../services/firebase';
 
@@ -13,6 +16,7 @@ export default function Header({
     docId: profileDocId,
     userId: profileUserId,
     username: profileUserName,
+    bio: userBio,
     fullName,
     followers = [],
     following = []
@@ -22,9 +26,29 @@ export default function Header({
   setFollowerCount
 }) {
   const { user } = useUser();
+  const navigate = useNavigate();
   const loggedInUsername = user?.username;
   const [isFollowingProfile, setIsFollowingProfile] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [newUsrnmloggedIn, setNewUsrnmLogInStatus] = useState(false);
   const activeBtnFollow = loggedInUsername && profileUserName !== loggedInUsername;
+  const isLoggedInUser = loggedInUsername && profileUserName === loggedInUsername;
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+  const handleOpenAbout = () => {
+    setOpen(true);
+  };
+
+  const handleCloseAbout = (e, newUsername, onlyReloadFlag) => {
+    setOpen(false);
+    if (newUsername && newUsername.length > 0) {
+      setNewUsrnmLogInStatus(true);
+      navigate(`/p/${newUsername}`);
+      window.location.reload();
+    } else if (onlyReloadFlag) {
+      window.location.reload();
+    }
+  };
 
   const handleToggleFollow = async () => {
     setIsFollowingProfile((isFollowingProfile) => !isFollowingProfile);
@@ -59,19 +83,37 @@ export default function Header({
       <div className="flex items-center justify-center flex-col col-span-2">
         <div className="container flex items-center">
           <p className="text-2xl mr-4">{profileUserName}</p>
+          {(isLoggedInUser || newUsrnmloggedIn) && (
+            <button
+              className="bg-gray-normal hover:bg-gray-primary font-bold text-sm rounded-md px-2 h-8"
+              type="button"
+              onClick={handleOpenAbout}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') handleOpenAbout();
+              }}
+            >
+              Edit Profile
+            </button>
+          )}
           {activeBtnFollow && isFollowingProfile === null ? (
             <Skeleton count={1} width={80} height={32} />
           ) : (
-            activeBtnFollow && (
+            activeBtnFollow &&
+            !newUsrnmloggedIn && (
               <button
-                className="bg-blue-medium font-bold text-sm rounded text-white w-20 h-8"
+                className={`font-bold text-sm rounded-md w-20 h-8
+                ${
+                  isFollowingProfile
+                    ? 'bg-gray-normal hover:bg-gray-primary'
+                    : 'bg-blue-active hover:bg-blue-medium text-white'
+                }`}
                 type="button"
                 onClick={handleToggleFollow}
                 onKeyDown={(event) => {
                   if (event.key === 'Enter') handleToggleFollow();
                 }}
               >
-                {isFollowingProfile ? 'Unfollow' : 'Follow'}
+                {isFollowingProfile ? 'Following' : 'Follow'}
               </button>
             )
           )}
@@ -106,7 +148,17 @@ export default function Header({
             {!fullName ? <Skeleton count={1} height={24} width={677} /> : fullName}
           </p>
         </div>
+        <div className="container max-h-[4rem] h-[4rem] text-ellipsis">
+          <p className="max-w-[20rem]">{userBio}</p>
+        </div>
       </div>
+      <About
+        fullScreen={fullScreen}
+        open={open}
+        handleClose={handleCloseAbout}
+        profileUserName={profileUserName}
+        profile={user}
+      />
     </div>
   );
 }
@@ -117,6 +169,7 @@ Header.propTypes = {
     docId: PropTypes.string,
     userId: PropTypes.string,
     username: PropTypes.string,
+    bio: PropTypes.string,
     fullName: PropTypes.string,
     followers: PropTypes.array,
     following: PropTypes.array
