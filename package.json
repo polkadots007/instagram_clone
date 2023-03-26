@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@welldone-software/why-did-you-render": "^7.0.1",
     "date-fns": "^2.29.3",
+    "emoji-picker-react": "^4.4.8",
     "firebase": "^9.17.1",
     "gh-pages": "^5.0.0",
     "prettier": "^2.8.3",
