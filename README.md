@@ -1,2 +1,2 @@
 App live at 
-[Instagram Clone](https://instagram-clone-coral-five.vercel.app/)
+[Snapper](https://snapper-ixqi-polkadots007.vercel.app/)
