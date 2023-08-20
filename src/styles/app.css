@@ -716,9 +716,6 @@ video {
 .w-\[470px\] {
   width: 470px;
 }
-.w-\[calc\(100vw\*0\.6\)\] {
-  width: calc(100vw * 0.6);
-}
 .w-10 {
   width: 2.5rem;
 }
@@ -742,6 +739,24 @@ video {
 }
 .w-14 {
   width: 3.5rem;
+}
+.w-\[400px\] {
+  width: 400px;
+}
+.w-\[500px\] {
+  width: 500px;
+}
+.w-\[50vw\] {
+  width: 50vw;
+}
+.w-\[60vw\] {
+  width: 60vw;
+}
+.min-w-full {
+  min-width: 100%;
+}
+.min-w-\[40\%\] {
+  min-width: 40%;
 }
 .max-w-full {
   max-width: 100%;

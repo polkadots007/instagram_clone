@@ -68,7 +68,7 @@ export default function Header({
 
   return !profileUserName ? (
     <Skeleton count={1} width="100%" height={200} />
-  ) : (
+  ) : !open ? (
     <div className="grid grid-cols-3 gap-4 justify-between mx-auto">
       <div className="container flex justify-center">
         <img
@@ -152,6 +152,9 @@ export default function Header({
           <p className="max-w-[20rem]">{userBio}</p>
         </div>
       </div>
+    </div>
+  ) : (
+    <div className="min-w-[40%]">
       <About
         fullScreen={fullScreen}
         open={open}

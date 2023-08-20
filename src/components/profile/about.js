@@ -157,11 +157,11 @@ export default function About({ fullScreen, open, handleClose, profileUserName, 
       onClose={handleClose}
       aria-labelledby="responsive-dialog-title"
     >
-      <DialogTitle id="responsive-dialog-title" className="text-center w-[calc(100vw*0.6)]">
+      <DialogTitle id="responsive-dialog-title" className="text-center">
         About
       </DialogTitle>
       <DialogContent>
-        <div className="container w-full flex items-center justify-center mb-6">
+        <div className="container w-[500px] flex items-center justify-center mb-6">
           <img
             className="rounded-full h-10 w-10 flex"
             alt={`${profileUserName} profile`}
